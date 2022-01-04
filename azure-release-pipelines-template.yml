@@ -42,5 +42,5 @@ stages:
                 resourceGroupName: ${{ parameters.resourceGroupName }}
                 location: ${{ parameters.region }}
                 csmFile: '$(Pipeline.Workspace)/build/Infrastructure/appservice-web-app-linux.json'
-                overrideParameters: '-appName ${{ parameters.appName }} -sku standard -skuCode S1 -linuxFxVersion ${{ parameters.linuxFxVersion }} -dockerRegistryPassword ${{ parameters.dockerRegistryPassword }} -APPLICATION_VERSION ${{ parameters.appVersion }}'
+                overrideParameters: '-appName ${{ parameters.appName }} -sku standard -skuCode S1 -linuxFxVersion ${{ parameters.linuxFxVersion }} -dockerRegistryPassword ${{ parameters.dockerRegistryPassword }} -applicationVersion ${{ parameters.appVersion }}'
                 deploymentOutputs: ResourceGroupDeploymentOutputs

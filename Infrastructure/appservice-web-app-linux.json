@@ -47,6 +47,10 @@
     "dockerRegistryPassword": {
       "type": "securestring",
       "defaultValue": null
+    },
+    "applicationVersion": {
+      "type": "string",
+      "defaultValue": "unknown"
     }
   }, 
   "variables": {
@@ -81,7 +85,11 @@
             {
               "name": "WEBSITES_ENABLE_APP_SERVICE_STORAGE",
               "value": "false"
-            }
+            },
+            {
+              "name": "APPLICATION_VERSION",
+              "value": "[parameters('applicationVersion')]"
+            }      
           ],
           "linuxFxVersion": "[parameters('linuxFxVersion')]",
           "alwaysOn": "[parameters('alwaysOn')]"
