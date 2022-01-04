@@ -3,7 +3,7 @@ trigger: none
 resources:
   pipelines:
   - pipeline: build
-    source: 'demo-app-service-cicd - BUILD'
+    source: 'demo-app-service-containers - RELEASE'
   
 variables:
   azureSubscription: 'Demo Account'
