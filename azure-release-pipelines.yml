@@ -19,3 +19,4 @@ stages:
     appName: 'rutzsco-app-service-api-ci'
     dockerRegistryPassword: $(dockerRegistryPassword)
     linuxFxVersion: 'DOCKER|rutzscocr.azurecr.io/dotnet/demo-api:$(resources.pipeline.build.runName)'
+    appVersion: $(resources.pipeline.build.runName)

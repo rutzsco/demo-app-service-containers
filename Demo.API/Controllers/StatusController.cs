@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 
 using System;
 using System.Collections;
@@ -11,14 +12,17 @@ namespace DemoAPI.Controllers
     [ApiController]
     public class StatusController : Controller
     {
+        private readonly IConfiguration _configuration;
+
+        public StatusController(IConfiguration config)
+        {
+            _configuration = config;
+        }
+
         [HttpGet("status")]
         public IActionResult Get()
         {
-            var version = "Unknown";
-            var variables = Environment.GetEnvironmentVariables();
-            if (variables.Contains("APPLICATION_VERSION"))
-                version = variables["APPLICATION_VERSION"].ToString();
-
+            var version = _configuration["APPLICATION_VERSION"];
             var vm = new { Version = version };
             return new OkObjectResult(vm);
         }
