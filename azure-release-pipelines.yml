@@ -1,0 +1,21 @@
+trigger: none
+
+resources:
+  pipelines:
+  - pipeline: build
+    source: 'demo-app-service-cicd - BUILD'
+  
+variables:
+  azureSubscription: 'Demo Account'
+
+stages:
+- template: azure-release-pipelines-template.yml
+  parameters:
+    stageName: 'CI'
+    environment: 'CI-APP-SERVICE'
+    azureSubscription: ${{ variables.azureSubscription }}
+    resourceGroupName: 'rutzsco-app-service-api-ci'
+    region: 'East US'
+    appName: 'rutzsco-app-service-api-ci'
+    dockerRegistryPassword: $(dockerRegistryPassword)
+    linuxFxVersion: 'DOCKER|rutzscocr.azurecr.io/dotnet/demo-api:$(resources.pipeline.build.runName)'
