@@ -30,10 +30,13 @@ namespace DemoAPI.Controllers
         [HttpGet("status/full")]
         public IEnumerable<KeyValuePair<string, string>> GetFull()
         {
-            var variables = new List<KeyValuePair<string, string>>();
-            foreach (DictionaryEntry de in Environment.GetEnvironmentVariables())
-                variables.Add(new KeyValuePair<string, string>(de.Key.ToString(), de.Value.ToString()));
-            return variables;
+            var values = _configuration.AsEnumerable().Select(c => new KeyValuePair<string,string>(c.Key,c.Value));
+            return values;
+
+            //var variables = new List<KeyValuePair<string, string>>();
+            //foreach (DictionaryEntry de in Environment.GetEnvironmentVariables())
+            //    variables.Add(new KeyValuePair<string, string>(de.Key.ToString(), de.Value.ToString()));
+            //return variables;
         }
     }
 }
