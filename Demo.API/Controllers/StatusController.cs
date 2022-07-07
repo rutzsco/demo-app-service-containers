@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -37,6 +38,17 @@ namespace DemoAPI.Controllers
             //foreach (DictionaryEntry de in Environment.GetEnvironmentVariables())
             //    variables.Add(new KeyValuePair<string, string>(de.Key.ToString(), de.Value.ToString()));
             //return variables;
+        }
+
+        [HttpGet("status/file")]
+        public IActionResult GetFile()
+        {
+            var values = _configuration.AsEnumerable().Select(c => new KeyValuePair<string, string>(c.Key, c.Value));
+            using (StreamWriter outputFile = new StreamWriter(Path.Combine("/files", $"{Guid.NewGuid()}.txt")))
+            {
+                outputFile.WriteLine("TEST");
+            }
+            return new OkObjectResult("OK");
         }
     }
 }
