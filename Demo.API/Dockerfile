@@ -18,6 +18,4 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 
-RUN mkdir -p /files
-
 ENTRYPOINT ["dotnet", "DemoAPI.dll"]
