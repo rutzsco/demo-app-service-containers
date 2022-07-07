@@ -40,8 +40,8 @@ namespace DemoAPI.Controllers
             //return variables;
         }
 
-        [HttpGet("status/file")]
-        public IActionResult GetFile()
+        [HttpPost("status/files")]
+        public IActionResult CreateFile()
         {
             var values = _configuration.AsEnumerable().Select(c => new KeyValuePair<string, string>(c.Key, c.Value));
             using (StreamWriter outputFile = new StreamWriter(Path.Combine("/files", $"{Guid.NewGuid()}.txt")))
@@ -49,6 +49,13 @@ namespace DemoAPI.Controllers
                 outputFile.WriteLine("TEST");
             }
             return new OkObjectResult("OK");
+        }
+
+        [HttpGet("status/files")]
+        public IActionResult GetFile()
+        {
+            string[] fileEntries = Directory.GetFiles("/files");
+            return new OkObjectResult(fileEntries);
         }
     }
 }
